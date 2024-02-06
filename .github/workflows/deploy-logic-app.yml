@@ -22,7 +22,10 @@ jobs:
         name: workflow
         path: ./output/
         retention-days: 1
-
+    - name: WhereIsIt
+      run: (pwd)
+    - name: dir
+      run: (dir)
   Deploy:
       runs-on: ubuntu-latest
       steps:
