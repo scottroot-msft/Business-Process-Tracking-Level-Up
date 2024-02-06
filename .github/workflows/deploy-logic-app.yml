@@ -15,7 +15,7 @@ jobs:
     - name: 'Checkout'
       uses: actions/checkout@v1
     - name: Package
-      run: (cd ./src/patient-tracking/LogicApps; mkdir -p ../../output; zip -r ../../output/workflow.zip .)
+      run: (cd ./src/patient-tracking/LogicApps; mkdir -p ./output; zip -r ./output/workflow.zip .)
     - name: 'Upload Package'
       uses: actions/upload-artifact@v2
       with:
