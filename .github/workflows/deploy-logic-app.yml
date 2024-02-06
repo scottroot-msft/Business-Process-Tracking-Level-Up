@@ -23,9 +23,9 @@ jobs:
         path: ./output/
         retention-days: 1
     - name: WhereIsIt
-      run: (pwd)
+      run: cd ./output/
     - name: dir
-      run: (dir)
+      run: (ls -al)
   Deploy:
       runs-on: ubuntu-latest
       steps:
