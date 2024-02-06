@@ -15,16 +15,16 @@ jobs:
     - name: 'Checkout'
       uses: actions/checkout@v1
     - name: Package
-      run: (cd ./src/patient-tracking/LogicApps; mkdir -p ./output; zip -r ./output/workflow.zip .)
+      run: (cd ./src/patient-tracking/LogicApps; mkdir -p ../../output; zip -r ../../output/workflow.zip .)
     - name: 'Upload Package'
       uses: actions/upload-artifact@v2
       with:
         name: workflow
         path: ./output/
         retention-days: 1
-    - name: WhereIsIt
-      run: cd ./output/
-    - name: dir
+    - name: 'Where Is It?'
+      run: (cd ../..)
+    - name: 'Whats in the dir'
       run: (ls -al)
   Deploy:
       runs-on: ubuntu-latest
