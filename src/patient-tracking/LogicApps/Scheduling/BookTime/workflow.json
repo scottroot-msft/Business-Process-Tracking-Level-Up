@@ -1,0 +1,81 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Response": {
+                "type": "Response",
+                "kind": "Http",
+                "inputs": {
+                    "statusCode": 200,
+                    "body": "@outputs('FormatResponse')"
+                },
+                "runAfter": {
+                    "FormatResponse": [
+                        "SUCCEEDED"
+                    ]
+                }
+            },
+            "FormatResponse": {
+                "type": "Compose",
+                "inputs": {
+                    "patientId": "@{triggerBody()?['patientId']}",
+                    "appointmentStatus": "confirmed",
+                    "appointmentDetails": {
+                        "appointmentId": "@{triggerBody()?['appointmentId']}",
+                        "providerName": "@{triggerBody()?['doctorName']}",
+                        "appointmentDate": "@{triggerBody()?['appointmentDate']}@{triggerBody()?['appointmentTime']}",
+                        "reasonForVisit": "@{triggerBody()?['reasonForVisit']}"
+                    }
+                },
+                "runAfter": {}
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "triggers": {
+            "When_a_HTTP_request_is_received": {
+                "type": "Request",
+                "kind": "Http",
+                "inputs": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "appointmentId": {
+                                "type": "integer"
+                            },
+                            "patientId": {
+                                "type": "string"
+                            },
+                            "patientName": {
+                                "type": "string"
+                            },
+                            "doctorName": {
+                                "type": "string"
+                            },
+                            "appointmentDate": {
+                                "type": "string"
+                            },
+                            "appointmentTime": {
+                                "type": "string"
+                            },
+                            "durationMinutes": {
+                                "type": "integer"
+                            },
+                            "reasonForVisit": {
+                                "type": "string"
+                            },
+                            "bloodPressure": {
+                                "type": "integer"
+                            },
+                            "temperature": {
+                                "type": "number"
+                            }
+                        }
+                    },
+                    "method": "POST"
+                }
+            }
+        }
+    },
+    "kind": "Stateful"
+}

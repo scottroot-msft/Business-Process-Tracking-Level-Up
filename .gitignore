@@ -1,1 +1,4 @@
 .azure
+src/patient-tracking/.debug/Microsoft.Azure.Workflows.Debug.Symbols.pdb
+src/patient-tracking/.debug/Microsoft.Azure.Workflows.Debug.Symbols.dll
+.vscode/settings.json

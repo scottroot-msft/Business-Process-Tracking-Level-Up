@@ -1,0 +1,41 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Response": {
+                "type": "Response",
+                "kind": "Http",
+                "inputs": {
+                    "statusCode": 200,
+                    "body": [
+                        {
+                            "appointment_id": 1,
+                            "doctor_name": "Alaine Cancellario",
+                            "appointment_date": "12/6/2022",
+                            "appointment_time": "6:54 AM"
+                        },
+                        {
+                            "appointment_id": 2,
+                            "doctor_name": "Lorry Oldcote",
+                            "appointment_date": "9/3/2022",
+                            "appointment_time": "7:15 PM"
+                        }
+                    ]
+                },
+                "runAfter": {}
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "triggers": {
+            "When_a_HTTP_request_is_received": {
+                "type": "Request",
+                "kind": "Http",
+                "inputs": {
+                    "method": "GET"
+                }
+            }
+        }
+    },
+    "kind": "Stateful"
+}
