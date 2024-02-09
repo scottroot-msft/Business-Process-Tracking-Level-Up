@@ -16,8 +16,14 @@ jobs:
       uses: actions/checkout@v1
     - name: Package
       run: (cd ./src/patient-tracking/LogicApps; mkdir -p ../../output; zip -r ../../output/workflow.zip .)
+    - name: 'Where am I right meow?'
+      run: (ls -al)
     - name: 'Where am I right meow cd?'
-      run: (cd ..)
+      run: (cd src/)
+    - name: 'Where am I right meow?'
+      run: (ls -al)
+    - name: 'Where am I right meow?'
+      run: (cd patient-tracking/)
     - name: 'Where am I right meow?'
       run: (ls -al)
     - name: 'Upload Package'
