@@ -16,6 +16,8 @@ jobs:
       uses: actions/checkout@v1
     - name: Package
       run: (cd ./src/patient-tracking/LogicApps; mkdir -p ../../output; zip -r ../../output/workflow.zip .)
+    - name: 'Where am I right meow?'
+      run: (pwd)
     - name: 'Upload Package'
       uses: actions/upload-artifact@v4
       with:
@@ -23,8 +25,7 @@ jobs:
         path: ./output/
         if-no-files-found: error
         retention-days: 1
-    - name: 'Where am I dropping this?'
-      run: (pwd)
+    
     - name: 'Where Is It?'
       run: (cd ../..)
     - name: 'Whats in the dir'
