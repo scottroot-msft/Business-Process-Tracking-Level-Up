@@ -17,7 +17,7 @@ var tags = {
   'azd-env-name': environmentName
 }
 
-var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+var resourceToken = 'hospitalintegration' //toLower(uniqueString(subscription().id, environmentName, location))
 
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: !empty(resourceGroupName) ? resourceGroupName : '${abbrs.resourcesResourceGroups}${environmentName}'
