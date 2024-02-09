@@ -23,7 +23,7 @@ jobs:
         path: ./output/
         retention-days: 1
     - name: 'Where am I dropping this?'
-      run: (pwd; ls-al)
+      run: (pwd)
     - name: 'Where Is It?'
       run: (cd ../..)
     - name: 'Whats in the dir'
