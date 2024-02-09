@@ -20,7 +20,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: workflow
-        path: ./output/
+        path: ../../output/
         retention-days: 1
     - name: 'Where am I dropping this?'
       run: (pwd)
