@@ -18,13 +18,9 @@ jobs:
     - name: Package
       run: (cd ./src/patient-tracking/LogicApps; mkdir -p ../../output; zip -r ../../output/workflow.zip .)
     - name: 'Where am I right meow?'
-      run: (ls -al)
+      run: (ls -al src/)
     - name: 'Where am I right meow cd?'
-      run: (cd src/)
-    - name: 'Where am I right meow?'
-      run: (ls -al)
-    - name: 'Where am I right meow?'
-      run: (cd src/patient-tracking/)
+      run: (ls -al src/patient-tracking/)
     - name: 'Where am I right meow?'
       run: (ls -al)
     - name: 'Upload Package'
