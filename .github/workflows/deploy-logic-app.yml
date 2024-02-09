@@ -17,7 +17,7 @@ jobs:
     - name: Package
       run: (cd ./src/patient-tracking/LogicApps; mkdir -p ../../output; zip -r ../../output/workflow.zip .)
     - name: 'Where am I right meow?'
-      run: (pwd)
+      run: (cd integration-environment-demo; ls -al)
     - name: 'Upload Package'
       uses: actions/upload-artifact@v4
       with:
