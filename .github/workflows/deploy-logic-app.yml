@@ -11,18 +11,19 @@ jobs:
   build:
     name: Build LogicApp Demo
     runs-on: ubuntu-latest
+    environment: 'development'
     steps:
     - name: 'Checkout'
       uses: actions/checkout@v1
     - name: Package
       run: (cd ./src/patient-tracking/LogicApps; mkdir -p ../../output; zip -r ../../output/workflow.zip .)
     - name: 'Upload Package'
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: workflow
-        path: ./output/
-        retention-days: 1
-
+        path: src/output/
+        if-no-files-found: error
+        retention-days: 1   
   Deploy:
       runs-on: ubuntu-latest
       steps:
@@ -32,32 +33,33 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
+          
       - name: 'get deployment package'
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v4
         with:
           name: workflow
           path: ./output/
 
       - run: |
-          echo "Azure Region: ${{vars.AZURE_REGION}}"
-          echo "LogicApp Plan Name: ${{vars.LOGICAPPPLAN_NAME}}"
-          echo "LogicApp Name: ${{vars.LOGICAPP_NAME}} "
-          echo "Workload Environment: ${{vars.WORKLOAD_ENVIRONMENT}}"
+          echo "Azure Region: eastus"
+          echo "LogicApp Plan Name: app-hospitalintegration"
+          echo "LogicApp Name: logic-hospitalintegration"
+          echo "Workload Environment: development"
+          echo "These are hardcoded and should be passed in from somewhere..."
 
       - name: 'Deploy LogicApp with Functions Action'
         uses: Azure/functions-action@v1
         id: la
         with:
-          app-name: ${{ vars.LOGICAPP_NAME }}
+          app-name: 'logic-hospitalintegration' # use env vars
           package: ./output/workflow.zip
           
-      - name: 'update logicapp settings'
-        uses: azure/appservice-settings@v1
-        with:
-          app-name: ${{ vars.LOGICAPP_NAME }}
-          app-settings-json: '[{"name":"CallRestApiURI","value":"${{vars.CallRestApiURI}}","slotSetting":"false"},{"name":"APIBaseURI","value":"https://webhook.site/c57923f4-f729-49ec-b123-aab28ec21ad3","slotSetting":"false"}]'
-          connection-strings-json: '[{"name":"testconnstr","value":"testconnstrvalue", "type":"Custom", "slotSetting":"false"}]'
+     # - name: 'update logicapp settings'
+     #   uses: azure/appservice-settings@v1
+     #   with:
+     #     app-name: ${{ vars.LOGICAPP_NAME }}
+     #     app-settings-json: '[{"name":"CallRestApiURI","value":"${{vars.CallRestApiURI}}","slotSetting":"false"},{"name":"APIBaseURI","value":"https://webhook.site/c57923f4-f729-49ec-b123-aab28ec21ad3","slotSetting":"false"}]'
+     #     connection-strings-json: '[{"name":"testconnstr","value":"testconnstrvalue", "type":"Custom", "slotSetting":"false"}]'
           #Note: can also use general-settings-json to manage workflow and general settings
 
 
