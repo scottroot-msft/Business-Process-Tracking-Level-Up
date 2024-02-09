@@ -11,6 +11,7 @@ jobs:
   build:
     name: Build LogicApp Demo
     runs-on: ubuntu-latest
+    environment: 'development'
     steps:
     - name: 'Checkout'
       uses: actions/checkout@v1
