@@ -23,7 +23,7 @@ jobs:
     - name: 'Where am I right meow?'
       run: (ls -al)
     - name: 'Where am I right meow?'
-      run: (cd patient-tracking/)
+      run: (cd src/patient-tracking/)
     - name: 'Where am I right meow?'
       run: (ls -al)
     - name: 'Upload Package'
