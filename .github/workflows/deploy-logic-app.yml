@@ -21,6 +21,7 @@ jobs:
       with:
         name: workflow
         path: output/
+        if-no-files-found: error
         retention-days: 1
     - name: 'Where am I dropping this?'
       run: (pwd)
