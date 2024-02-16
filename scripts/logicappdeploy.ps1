@@ -1,3 +1,5 @@
+param($logicAppName, $resourceGroupName)
+
 $ErrorActionPreference = 'Stop'
 $dir = $PSScriptRoot
 $root = Resolve-Path "$dir/../"
@@ -10,6 +12,7 @@ Write-Host "- Setting up Logic App"
 
 Compress-Archive -Path .\src\patient-tracking\LogicApps\* -DestinationPath .\output\workflows.zip -Force
 
-az logicapp deployment source config-zip --name logic-hospitalintegration  --resource-group rg-business-process-levelup --src .\output\workflows.zip
+az logicapp deployment source config-zip --name $logicAppName  --resource-group $resourceGroupName --src .\output\workflows.zip
+Write-Host "- Logic App Setup Complete for $logicAppName in $resourceGroupName."
 
-Write-Host "- Logic App Setup Complete"
+Pop-Location

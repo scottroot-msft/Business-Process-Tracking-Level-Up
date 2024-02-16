@@ -6,7 +6,7 @@ hooks:
     shell: pwsh
     continueOnError: false
     interactive: false
-    run: ./scripts/logicappdeploy.ps1
+    run: ./scripts/logicappdeploy.ps1 -logicAppName "logic-hospitalintegration" -resourceGroupName "rg-business-process-levelup"
 workflows:
   up:
   - azd: provision
