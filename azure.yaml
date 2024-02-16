@@ -8,8 +8,13 @@
 name: logicapp-hospital-levelup
 infra:
     provider: "bicep"
-services:
-  workflows:
-    project: ./src/patient-tracking/LogicApps
-    host: function
-    language: js
+hooks:
+  predeploy:
+    shell: pwsh
+    continueOnError: false
+    interactive: false
+    run: ./scripts/logicappdeploy.ps1
+workflows:
+  up:
+  - azd: provision
+  - azd: deploy --all
