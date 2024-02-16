@@ -3,7 +3,7 @@ targetScope = 'subscription'
 @minLength(1)
 @maxLength(64)
 @description('Name of the the environment which is used to generate a short unique hash used in all resources.')
-param environmentName string
+param environmentName string = 'nonprod'
 
 @minLength(1)
 @description('Primary location for all resources')
@@ -55,6 +55,16 @@ module managedIdentityDeployment 'modules/managedidentity.bicep' = {
   }
 }
 
+var queueNames = [
+  'patient-queue'
+  'checked-in-queue'
+  'triaged-queue'
+  'taken-vitals-queue'
+  'examined-queue'
+  'labs-drawn-queue'
+  'labs-processed-queue'
+]
+
 module serviceBusDeployment 'modules/servicebus.bicep' = {
   name: 'service-bus-deployment'
   scope: rg
@@ -63,7 +73,8 @@ module serviceBusDeployment 'modules/servicebus.bicep' = {
     location: location
     serviceBusConnectionStringSecretName: 'service-bus-connection-string'
     serviceBusNamespaceName: 'sb-${resourceToken}'
-    serviceBusQueueName: 'patient-queue' //Switch to topic??
+    serviceBusQueueNames: queueNames
+    managedIdentityName: managedIdentityDeployment.outputs.managedIdentityName
   }
 }
 
