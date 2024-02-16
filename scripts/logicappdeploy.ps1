@@ -13,4 +13,3 @@ Compress-Archive -Path .\src\patient-tracking\LogicApps\* -DestinationPath .\out
 az logicapp deployment source config-zip --name logic-hospitalintegration  --resource-group rg-business-process-levelup --src .\output\workflows.zip
 
 Write-Host "- Logic App Setup Complete"
-#Push-Location $dir
