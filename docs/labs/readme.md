@@ -10,7 +10,7 @@ This lab demonstrates how to use the Contoso Hospital application to manage pati
 
 List any prerequisites or requirements for completing the lab.
 There a a few prerequisites for this lab.  Please ensure you have completed the following instructions before starting this lab:
-- [START HERE - Environment Setup](link-to-environment-setup.md) 
+- [START HERE - Environment Setup](environment-setup.md) 
 
 
 ## Instructions
