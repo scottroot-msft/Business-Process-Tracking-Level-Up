@@ -4,3 +4,4 @@ src/patient-tracking/.debug/Microsoft.Azure.Workflows.Debug.Symbols.dll
 .vscode/settings.json
 /output/
 LogicApp.zip
+__azurite*
