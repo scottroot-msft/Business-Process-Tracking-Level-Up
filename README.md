@@ -22,4 +22,4 @@ The repository has the following folder structure:
 - `infra`: Contains the infrastructure files.
 
 ## Getting Started
-Lab instructions are provided in the [docs](./docs/labs) folder.
+Lab instructions are provided in the [docs](./docs/labs/readme.md) folder.
