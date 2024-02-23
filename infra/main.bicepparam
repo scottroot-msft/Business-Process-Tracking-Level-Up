@@ -1,5 +1,5 @@
 using './main.bicep'
 
-param resourceGroupName = 'rg-business-process-levelup'
-param environmentName = 'levelup'
+param resourceGroupName = ''
+param environmentName = readEnvironmentVariable('AZURE_ENV_NAME', 'levelup')
 param location = 'eastus'
