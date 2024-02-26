@@ -29,7 +29,10 @@ There a a few prerequisites for this lab.  Please ensure you have completed the 
       - Also specify the location for the deployment.
 4. Create the Azure Integration Environment Resource
    - [Link to Create Integration Environment Instructions](https://learn.microsoft.com/en-us/azure/integration-environments/create-integration-environment)
-5. TBD
+5. Create Application
+   - Create new Azure Data Explorer Storage
+      - Steps for that
+6. Create Business Processes
 
 ## Conclusion
 
