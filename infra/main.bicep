@@ -97,3 +97,6 @@ module logicAppDeployment 'modules/logicapp.bicep' = {
 
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
+output AZURE_SUBSCRIPTION_ID string = subscription().subscriptionId
+output AZURE_RESOURCE_GROUP_NAME string = rg.name
+output AZURE_LOGIC_APP_NAME string = logicAppDeployment.outputs.logicAppName
