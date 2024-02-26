@@ -1,10 +1,64 @@
 {
   "definition": {
-    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-    "actions": {},
-    "contentVersion": "1.0.0.0",
-    "outputs": {},
-    "triggers": {}
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+          "Delay": {
+              "inputs": {
+                  "interval": {
+                      "count": "@rand(2,4)",
+                      "unit": "Second"
+                  }
+              },
+              "runAfter": {},
+              "type": "Wait"
+          },
+          "Send_message": {
+              "inputs": {
+                  "parameters": {
+                      "entityName": "checked-in-queue",
+                      "message": {
+                          "contentData": {
+                              "appointment_id": "@{triggerBody()?['appointment_id']}",
+                              "patient_name": "@{triggerBody()?['patient_name']}"
+                          }
+                      }
+                  },
+                  "serviceProviderConfiguration": {
+                      "connectionName": "serviceBus",
+                      "operationId": "sendMessage",
+                      "serviceProviderId": "/serviceProviders/serviceBus"
+                  }
+              },
+              "runAfter": {
+                  "Delay": [
+                      "SUCCEEDED"
+                  ]
+              },
+              "type": "ServiceProvider"
+          }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "triggers": {
+          "When_a_HTTP_request_is_received": {
+              "inputs": {
+                  "method": "POST",
+                  "schema": {
+                      "properties": {
+                          "appointment_id": {
+                              "type": "string"
+                          },
+                          "patient_name": {
+                              "type": "string"
+                          }
+                      },
+                      "type": "object"
+                  }
+              },
+              "kind": "Http",
+              "type": "Request"
+          }
+      }
   },
   "kind": "Stateful"
 }

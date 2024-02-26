@@ -1,3 +1,15 @@
 {
-  "managedApiConnections": {}
+  "managedApiConnections": {},
+  "serviceProviderConnections": {
+      "serviceBus": {
+          "displayName": "sb-conn-string",
+          "parameterSetName": "connectionString",
+          "parameterValues": {
+              "connectionString": "@appsetting('ServiceBus-ConnectionString')"
+          },
+          "serviceProvider": {
+              "id": "/serviceProviders/serviceBus"
+          }
+      }
+  }
 }
