@@ -6,7 +6,7 @@ hooks:
     shell: pwsh
     continueOnError: false
     interactive: false
-    run: ./scripts/logicappdeploy.ps1 -logicAppName ${AZURE_LOGIC_APP_NAME} -resourceGroupName ${AZURE_RESOURCE_GROUP_NAME}
+    run: ./scripts/logicappdeploy.ps1
 workflows:
   up:
   - azd: provision

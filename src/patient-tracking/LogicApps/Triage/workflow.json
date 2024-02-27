@@ -1,88 +1,99 @@
 {
     "definition": {
-        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-        "actions": {
-            "For_each": {
-                "actions": {
-                    "Delay": {
-                        "inputs": {
-                            "interval": {
-                                "count": "r@rand(3,7)",
-                                "unit": "Second"
-                            }
-                        },
-                        "runAfter": {
-                            "Parse_JSON": [
-                                "SUCCEEDED"
-                            ]
-                        },
-                        "type": "Wait"
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+        "For_each": {
+          "type": "foreach",
+          "foreach": "@triggerOutputs()?['body']",
+          "actions": {
+            "Delay": {
+              "type": "Wait",
+              "inputs": {
+                "interval": {
+                  "count": "@rand(3,7)",
+                  "unit": "Second"
+                }
+              },
+              "runAfter": {
+                "Parse_JSON": [
+                  "SUCCEEDED"
+                ]
+              }
+            },
+            "Parse_JSON": {
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@item()?['contentData']",
+                "schema": {
+                  "properties": {
+                    "appointment_id": {
+                      "type": "string"
                     },
-                    "Parse_JSON": {
-                        "inputs": {
-                            "content": "@item()?['contentData']",
-                            "schema": {
-                                "properties": {
-                                    "appointment_id": {
-                                        "type": "string"
-                                    },
-                                    "patient_name": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "type": "ParseJson"
-                    },
-                    "Send_message": {
-                        "inputs": {
-                            "parameters": {
-                                "entityName": "triaged-queue",
-                                "message": {
-                                    "contentData": {
-                                        "appointment_id": "@{body('Parse_JSON')?['appointment_id']}",
-                                        "patient_name": "@{body('Parse_JSON')?['patient_name']}"
-                                    }
-                                }
-                            },
-                            "serviceProviderConfiguration": {
-                                "connectionName": "serviceBus",
-                                "operationId": "sendMessage",
-                                "serviceProviderId": "/serviceProviders/serviceBus"
-                            }
-                        },
-                        "runAfter": {
-                            "Delay": [
-                                "SUCCEEDED"
-                            ]
-                        },
-                        "type": "ServiceProvider"
+                    "patient_name": {
+                      "type": "string"
                     }
-                },
-                "foreach": "@triggerOutputs()?['body']",
-                "runAfter": {},
-                "type": "foreach"
-            }
-        },
-        "contentVersion": "1.0.0.0",
-        "outputs": {},
-        "triggers": {
-            "When_messages_are_available_in_a_queue": {
-                "inputs": {
-                    "parameters": {
-                        "isSessionsEnabled": false,
-                        "queueName": "checked-in-queue"
-                    },
-                    "serviceProviderConfiguration": {
-                        "connectionName": "serviceBus",
-                        "operationId": "receiveQueueMessages",
-                        "serviceProviderId": "/serviceProviders/serviceBus"
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "Send_message": {
+              "type": "ServiceProvider",
+              "inputs": {
+                "parameters": {
+                  "entityName": "triaged-queue",
+                  "message": {
+                    "contentData": {
+                      "appointment_id": "@{body('Parse_JSON')?['appointment_id']}",
+                      "patient_name": "@{body('Parse_JSON')?['patient_name']}"
                     }
+                  }
                 },
-                "type": "ServiceProvider"
+                "serviceProviderConfiguration": {
+                  "connectionName": "serviceBus",
+                  "operationId": "sendMessage",
+                  "serviceProviderId": "/serviceProviders/serviceBus"
+                }
+              },
+              "runAfter": {
+                "Delay": [
+                  "SUCCEEDED"
+                ]
+              }
             }
+          },
+          "runAfter": {}
         }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "triggers": {
+        "When_messages_are_available_in_a_queue": {
+          "type": "ServiceProvider",
+          "inputs": {
+            "parameters": {
+              "queueName": "checked-in-queue",
+              "isSessionsEnabled": false
+            },
+            "serviceProviderConfiguration": {
+              "connectionName": "serviceBus",
+              "operationId": "receiveQueueMessages",
+              "serviceProviderId": "/serviceProviders/serviceBus"
+            }
+          }
+        }
+      }
     },
-    "kind": "Stateful"
-}
+    "connectionReferences": {
+      "serviceBus": {
+        "connection": {
+          "id": "/serviceProviders/serviceBus/connections/serviceBus"
+        },
+        "connectionName": "sb-conn-string",
+        "api": {
+          "id": "/serviceProviders/serviceBus"
+        }
+      }
+    },
+    "parameters": {}
+  }

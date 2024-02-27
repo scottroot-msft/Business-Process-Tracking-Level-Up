@@ -1,4 +1,5 @@
-param($logicAppName, $resourceGroupName)
+$logicAppName = $env:AZURE_LOGIC_APP_NAME
+$resourceGroupName = $env:AZURE_RESOURCE_GROUP_NAME
 
 $ErrorActionPreference = 'Stop'
 $dir = $PSScriptRoot
