@@ -61,6 +61,7 @@ var queueNames = [
   'triaged-queue'
   'taken-vitals-queue'
   'examined-queue'
+  'examined-needs-labs-queue'
   'labs-drawn-queue'
   'labs-processed-queue'
 ]

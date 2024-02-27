@@ -1,0 +1,75 @@
+{
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+        "For_each": {
+          "type": "foreach",
+          "foreach": "@triggerOutputs()?['body']",
+          "actions": {
+            "Delay": {
+              "type": "Wait",
+              "inputs": {
+                "interval": {
+                  "count": "@rand(2,5)",
+                  "unit": "Second"
+                }
+              },
+              "runAfter": {
+                "Parse_JSON": [
+                  "SUCCEEDED"
+                ]
+              }
+            },
+            "Parse_JSON": {
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@item()?['contentData']",
+                "schema": {
+                  "properties": {
+                    "appointment_id": {
+                      "type": "string"
+                    },
+                    "patient_name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "runAfter": {}
+        }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "triggers": {
+        "When_messages_are_available_in_a_queue": {
+          "type": "ServiceProvider",
+          "inputs": {
+            "parameters": {
+              "queueName": "examined-queue",
+              "isSessionsEnabled": false
+            },
+            "serviceProviderConfiguration": {
+              "connectionName": "serviceBus",
+              "operationId": "receiveQueueMessages",
+              "serviceProviderId": "/serviceProviders/serviceBus"
+            }
+          }
+        }
+      }
+    },
+    "connectionReferences": {
+      "serviceBus": {
+        "connection": {
+          "id": "/serviceProviders/serviceBus/connections/serviceBus"
+        },
+        "connectionName": "sb-conn-string",
+        "api": {
+          "id": "/serviceProviders/serviceBus"
+        }
+      }
+    },
+    "parameters": {}
+  }

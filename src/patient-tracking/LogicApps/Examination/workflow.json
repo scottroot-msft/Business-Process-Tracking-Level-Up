@@ -1,0 +1,163 @@
+{
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "actions": {
+      "For_each": {
+        "type": "foreach",
+        "foreach": "@triggerOutputs()?['body']",
+        "actions": {
+          "Delay": {
+            "type": "Wait",
+            "inputs": {
+              "interval": {
+                "count": "@rand(5,10)",
+                "unit": "Second"
+              }
+            },
+            "runAfter": {
+              "Parse_JSON": [
+                "SUCCEEDED"
+              ]
+            }
+          },
+          "Parse_JSON": {
+            "type": "ParseJson",
+            "inputs": {
+              "content": "@item()?['contentData']",
+              "schema": {
+                "properties": {
+                  "appointment_id": {
+                    "type": "string"
+                  },
+                  "patient_name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "Send_message": {
+            "type": "ServiceProvider",
+            "inputs": {
+              "parameters": {
+                "entityName": "",
+                "message": {
+                  "contentData": {
+                    "appointment_id": "@{body('Parse_JSON')?['appointment_id']}",
+                    "patient_name": "@{body('Parse_JSON')?['patient_name']}"
+                  }
+                }
+              },
+              "serviceProviderConfiguration": {
+                "connectionName": "serviceBus",
+                "operationId": "sendMessage",
+                "serviceProviderId": "/serviceProviders/serviceBus"
+              }
+            },
+            "runAfter": {
+              "Condition_-_need_labs?": [
+                "SUCCEEDED"
+              ]
+            }
+          },
+          "Initialize_needs_lab_variable": {
+            "type": "InitializeVariable",
+            "inputs": {
+              "variables": [
+                {
+                  "name": "needs_labs",
+                  "type": "boolean",
+                  "value": true
+                }
+              ]
+            },
+            "runAfter": {
+              "Delay": [
+                "SUCCEEDED"
+              ]
+            }
+          },
+          "Condition_-_need_labs?": {
+            "type": "If",
+            "expression": {
+              "and": [
+                {
+                  "equals": [
+                    "@variables('needs_labs')",
+                    1
+                  ]
+                }
+              ]
+            },
+            "actions": {
+              "Set_queue_name_for_labs": {
+                "type": "SetVariable",
+                "inputs": {
+                  "name": "resulting_queue_name",
+                  "value": "examined-needs-labs-queue"
+                }
+              }
+            },
+            "else": {
+              "actions": {}
+            },
+            "runAfter": {
+              "Initialize_queue_name_variable": [
+                "SUCCEEDED"
+              ]
+            }
+          },
+          "Initialize_queue_name_variable": {
+            "type": "InitializeVariable",
+            "inputs": {
+              "variables": [
+                {
+                  "name": "resulting_queue_name",
+                  "type": "string",
+                  "value": "examined-queue"
+                }
+              ]
+            },
+            "runAfter": {
+              "Initialize_needs_lab_variable": [
+                "SUCCEEDED"
+              ]
+            }
+          }
+        },
+        "runAfter": {}
+      }
+    },
+    "contentVersion": "1.0.0.0",
+    "outputs": {},
+    "triggers": {
+      "When_messages_are_available_in_a_queue": {
+        "type": "ServiceProvider",
+        "inputs": {
+          "parameters": {
+            "queueName": "taken-vitals-queue",
+            "isSessionsEnabled": false
+          },
+          "serviceProviderConfiguration": {
+            "connectionName": "serviceBus",
+            "operationId": "receiveQueueMessages",
+            "serviceProviderId": "/serviceProviders/serviceBus"
+          }
+        }
+      }
+    }
+  },
+  "connectionReferences": {
+    "serviceBus": {
+      "connection": {
+        "id": "/serviceProviders/serviceBus/connections/serviceBus"
+      },
+      "connectionName": "sb-conn-string",
+      "api": {
+        "id": "/serviceProviders/serviceBus"
+      }
+    }
+  },
+  "parameters": {}
+}
