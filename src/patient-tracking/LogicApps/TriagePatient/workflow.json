@@ -1,0 +1,59 @@
+{
+  "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+          "Delay": {
+              "inputs": {
+                  "interval": {
+                      "count": 5,
+                      "unit": "Second"
+                  }
+              },
+              "runAfter": {},
+              "type": "Wait"
+          },
+          "Send_message": {
+              "inputs": {
+                  "parameters": {
+                      "entityName": "triaged-queue",
+                      "message": {
+                          "contentData": "@triggerBody()?['contentData']",
+                          "contentType": "application/json"
+                      }
+                  },
+                  "serviceProviderConfiguration": {
+                      "connectionName": "serviceBus",
+                      "operationId": "sendMessage",
+                      "serviceProviderId": "/serviceProviders/serviceBus"
+                  }
+              },
+              "runAfter": {
+                  "Delay": [
+                      "SUCCEEDED"
+                  ]
+              },
+              "type": "ServiceProvider"
+          }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "triggers": {
+          "When_messages_are_available_in_a_queue": {
+              "inputs": {
+                  "parameters": {
+                      "isSessionsEnabled": false,
+                      "queueName": "checked-in-queue"
+                  },
+                  "serviceProviderConfiguration": {
+                      "connectionName": "serviceBus",
+                      "operationId": "receiveQueueMessages",
+                      "serviceProviderId": "/serviceProviders/serviceBus"
+                  }
+              },
+              "splitOn": "@triggerOutputs()?['body']",
+              "type": "ServiceProvider"
+          }
+      }
+  },
+  "kind": "Stateful"
+}

@@ -64,3 +64,4 @@ resource serviceBusConnectionStringSecret 'Microsoft.KeyVault/vaults/secrets@202
 
 output serviceBusNamespaceName string = serviceBusNamespace.name
 output serviceBusConnectionStringSecretName string = serviceBusConnectionStringSecretName
+output serviceBusSASConnectionString string = 'Endpoint=sb://${serviceBusNamespace.name}.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=${listKeys(endpoint, serviceBusNamespace.apiVersion).primaryKey}'

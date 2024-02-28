@@ -90,24 +90,24 @@ module logicAppDeployment 'modules/logicapp.bicep' = {
     location: rg.location
     logAnalyticsWorkspaceName: loggingDeployment.outputs.logAnalyticsWorkspaceName
     managedIdentityName: managedIdentityDeployment.outputs.managedIdentityName
-    serviceBusConnectionStringSecretName: serviceBusDeployment.outputs.serviceBusConnectionStringSecretName
+    serviceBusSasEndpoint: serviceBusDeployment.outputs.serviceBusSASConnectionString
     logicAppStorageAccountConnectionStringSecretName: 'logic-app-storage-account-connection-string'
     logicAppStorageAccountName: '${abbrs.storageStorageAccounts}${resourceToken}'
   }
 }
 
-module azureDataExplorerDB 'modules/azdataexplorer.bicep' = {
-  scope: rg
-  name: '${abbrs.kustoClusters}${resourceToken}'
-  params: {
-    location: location
-    managedIdentityName: managedIdentityDeployment.outputs.managedIdentityName
-    databaseName: '${abbrs.kustoClustersDatabases}-${resourceToken}'
-    clusterName: '${abbrs.kustoClusters}-${resourceToken}'
-    skuName: 'Dev(No SLA)_Standard_E2a_v4'
-    skuCapacity: 1
-  }
-}
+// module azureDataExplorerDB 'modules/azdataexplorer.bicep' = {
+//   scope: rg
+//   name: '${abbrs.kustoClusters}${resourceToken}'
+//   params: {
+//     location: location
+//     managedIdentityName: managedIdentityDeployment.outputs.managedIdentityName
+//     databaseName: '${abbrs.kustoClustersDatabases}-${resourceToken}'
+//     clusterName: '${abbrs.kustoClusters}-${resourceToken}'
+//     skuName: 'Dev(No SLA)_Standard_E2a_v4'
+//     skuCapacity: 1
+//   }
+// }
 
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
