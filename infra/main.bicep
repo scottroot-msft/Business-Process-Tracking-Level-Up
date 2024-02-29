@@ -56,7 +56,7 @@ module managedIdentityDeployment 'modules/managedidentity.bicep' = {
 }
 
 var queueNames = [
-  'patient-queue'
+  'checked-out-queue'
   'checked-in-queue'
   'triaged-queue'
   'taken-vitals-queue'
