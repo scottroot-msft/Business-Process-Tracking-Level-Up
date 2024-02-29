@@ -64,6 +64,7 @@ var queueNames = [
   'needs-labs-queue'
   'labs-drawn-queue'
   'labs-processed-queue'
+  'insurance-adjusted-queue'
 ]
 
 module serviceBusDeployment 'modules/servicebus.bicep' = {

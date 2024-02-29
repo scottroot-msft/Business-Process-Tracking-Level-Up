@@ -1,0 +1,44 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Response": {
+                "type": "Response",
+                "kind": "Http",
+                "inputs": {
+                    "statusCode": 201,
+                    "headers": {
+                        "content-type": "application/json"
+                    },
+                    "body": {
+                        "Status": "Payment Processed Succesfully"
+                    }
+                },
+                "runAfter": {}
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "triggers": {
+            "When_a_HTTP_request_is_received": {
+                "type": "Request",
+                "kind": "Http",
+                "inputs": {
+                    "schema": {
+                        "properties": {
+                            "appointment_id": {
+                                "type": "string"
+                            },
+                            "patient_name": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "method": "POST"
+                }
+            }
+        }
+    },
+    "kind": "Stateful"
+}
