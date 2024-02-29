@@ -12,7 +12,7 @@ Write-Host "Checking Azure CLI"
 try{ az --version }
 catch
     { 
-        Write-Host ">>>> Azure CLI not installed.  Please install and try again" 
+        Write-Error ">>>> Azure CLI not installed.  Please install and try again" 
         $MissingSomething = [bool]::Parse("true")
     }
 Write-Host ""
@@ -26,8 +26,8 @@ try{
 }
 catch
     { 
-        Write-Host ">>>> Azure Developer CLI not installed.  Please install and try again"  -ForegroundColor yellow
-        Write-Host ">>>> You can install it by running the following command in a terminal window: winget install microsoft.azd" -ForegroundColor yellow
+        Write-Error ">>>> Azure Developer CLI not installed.  Please install and try again"  
+        Write-Error ">>>> You can install it by running the following command in a terminal window: winget install microsoft.azd" 
         $MissingSomething = [bool]::Parse("true")
     }
 Write-Host ""
@@ -41,8 +41,8 @@ try {
     }
 catch 
     { 
-        Write-Host ">>>> Azure Functions Core Tools not installed.  Please install and try again" -ForegroundColor yellow
-        Write-Host ">>>> You can install it by running the visiting https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local" -ForegroundColor yellow
+        Write-Error ">>>> Azure Functions Core Tools not installed.  Please install and try again" 
+        Write-Error ">>>> You can install it by running the visiting https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local" 
         $MissingSomething = [bool]::Parse("true")
     }
 Write-Host ""
@@ -56,8 +56,8 @@ try {
     }
 catch 
     { 
-        Write-Host ">>>> Visual Studio Code not installed.  Please install and try again" -ForegroundColor yellow
-        Write-Host ">>>> You can install it by visiting https://code.visualstudio.com/" -ForegroundColor yellow
+        Write-Error ">>>> Visual Studio Code not installed.  Please install and try again" 
+        Write-Error ">>>> You can install it by visiting https://code.visualstudio.com/" 
         $MissingSomething = [bool]::Parse("true")
     }
 Write-Host ""
@@ -69,9 +69,9 @@ Write-Host "Checking Visual Studio Code Extensions"
 $listofextensions= code --list-extensions
 
 if ($listofextensions -notcontains "azurite.azurite") {
-    Write-Host ">>>> Azurite.azurite extension not installed.  Please install and try again"
-    Write-Host ">>>> You can install it by running the following command in a terminal window:"
-    Write-Host ">>>> code --install-extension Azurite.azurite"
+    Write-Error ">>>> Azurite.azurite extension not installed.  Please install and try again"
+    Write-Error ">>>> You can install it by running the following command in a terminal window:"
+    Write-Error ">>>> code --install-extension Azurite.azurite"
     $MissingSomething = [bool]::Parse("true")
 } else {
     Write-Host @greenCheck
@@ -79,9 +79,9 @@ if ($listofextensions -notcontains "azurite.azurite") {
 }
 
 if ($listofextensions -notcontains "ms-vscode.azurecli") {
-    Write-Host ">>>> ms-vscode.azurecli extension not installed.  Please install and try again"
-    Write-Host ">>>> You can install it by running the following command in a terminal window:"
-    Write-Host ">>>> code --install-extension ms-vscode.azurecli"
+    Write-Error ">>>> ms-vscode.azurecli extension not installed.  Please install and try again"
+    Write-Error ">>>> You can install it by running the following command in a terminal window:"
+    Write-Error ">>>> code --install-extension ms-vscode.azurecli"
     $MissingSomething = [bool]::Parse("true")
 } else {
     Write-Host @greenCheck
@@ -89,9 +89,9 @@ if ($listofextensions -notcontains "ms-vscode.azurecli") {
 }
 
 if ($listofextensions -notcontains "ms-vscode.azure-account") {
-    Write-Host ">>>> ms-vscode.azure-account extension not installed.  Please install and try again"
-    Write-Host ">>>> You can install it by running the following command in a terminal window:"
-    Write-Host ">>>> code --install-extension ms-vscode.azure-account"
+    Write-Error ">>>> ms-vscode.azure-account extension not installed.  Please install and try again"
+    Write-Error ">>>> You can install it by running the following command in a terminal window:"
+    Write-Error ">>>> code --install-extension ms-vscode.azure-account"
     $MissingSomething = [bool]::Parse("true")
 } else {
     Write-Host @greenCheck
@@ -99,9 +99,9 @@ if ($listofextensions -notcontains "ms-vscode.azure-account") {
 }
 
 if ($listofextensions -notcontains "ms-dotnettools.csharp") {
-    Write-Host ">>>> ms-dotnettools.csharp extension not installed.  Please install and try again"
-    Write-Host ">>>> You can install it by running the following command in a terminal window:"
-    Write-Host ">>>> code --install-extension ms-dotnettools.csharp"
+    Write-Error ">>>> ms-dotnettools.csharp extension not installed.  Please install and try again"
+    Write-Error ">>>> You can install it by running the following command in a terminal window:"
+    Write-Error ">>>> code --install-extension ms-dotnettools.csharp"
     $MissingSomething = [bool]::Parse("true")
 } else {
     Write-Host @greenCheck
@@ -109,9 +109,9 @@ if ($listofextensions -notcontains "ms-dotnettools.csharp") {
 }
 
 if ($listofextensions -notcontains "ms-azuretools.azure-dev") {
-    Write-Host ">>>> ms-azuretools.azure-dev extension not installed.  Please install and try again"
-    Write-Host ">>>> You can install it by running the following command in a terminal window:"
-    Write-Host ">>>> code --install-extension ms-azuretools.azure-dev"
+    Write-Error ">>>> ms-azuretools.azure-dev extension not installed.  Please install and try again"
+    Write-Error ">>>> You can install it by running the following command in a terminal window:"
+    Write-Error ">>>> code --install-extension ms-azuretools.azure-dev"
     $MissingSomething = [bool]::Parse("true")
 } else {
     Write-Host @greenCheck
@@ -119,9 +119,9 @@ if ($listofextensions -notcontains "ms-azuretools.azure-dev") {
 }
 
 if ($listofextensions -notcontains "ms-azuretools.vscode-azurefunctions") {
-    Write-Host ">>>> ms-azuretools.vscode-azurefunctions extension not installed.  Please install and try again"
-    Write-Host ">>>> You can install it by running the following command in a terminal window:"
-    Write-Host ">>>> code --install-extension ms-azuretools.vscode-azurefunctions"
+    Write-Error ">>>> ms-azuretools.vscode-azurefunctions extension not installed.  Please install and try again"
+    Write-Error ">>>> You can install it by running the following command in a terminal window:"
+    Write-Error ">>>> code --install-extension ms-azuretools.vscode-azurefunctions"
     $MissingSomething = [bool]::Parse("true")
 } else {
     Write-Host @greenCheck
@@ -129,9 +129,9 @@ if ($listofextensions -notcontains "ms-azuretools.vscode-azurefunctions") {
 }
 
 if ($listofextensions -notcontains "ms-azuretools.vscode-azurelogicapps") {
-    Write-Host ">>>> ms-azuretools.vscode-azurelogicapps extension not installed.  Please install and try again"
-    Write-Host ">>>> You can install it by running the following command in a terminal window:"
-    Write-Host ">>>> code --install-extension ms-azuretools.vscode-azurelogicapps"
+    Write-Error ">>>> ms-azuretools.vscode-azurelogicapps extension not installed.  Please install and try again"
+    Write-Error ">>>> You can install it by running the following command in a terminal window:"
+    Write-Write-ErrorHost ">>>> code --install-extension ms-azuretools.vscode-azurelogicapps"
     $MissingSomething = [bool]::Parse("true")
 } else {
     Write-Host @greenCheck
@@ -141,9 +141,9 @@ if ($listofextensions -notcontains "ms-azuretools.vscode-azurelogicapps") {
 # Did we run into any problems?
 if ($MissingSomething)
     {
-        Write-Host "------------------------------------"
-        Write-Host "One or more components are missing. " -ForegroundColor red
-        Write-Host "Please review the log above and install the missing components before continuing" -ForegroundColor red
+        Write-Error "------------------------------------"
+        Write-Error "One or more components are missing. "
+        Write-Error "Please review the log above and install the missing components before continuing" 
     }
     else {
         Write-Host "------------------------------------"
