@@ -1,12 +1,13 @@
-@hostname = logic-ujyxxajhiwfyw.azurewebsites.net
+@hostname = [Your Logic App's hostname]
 @protocol = https
 @port = 443
 @host = {{hostname}}:{{port}}
 @content-type = application/json
-@sig = [your sig here]
-@checkInAPI = Check-In/triggers/When_a_HTTP_request_is_received/invoke?api-version=2022-05-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig={{sig}}
+@sig = [Your Logic App's HTTP trigger signature]
+@paymentAPI = Payment/triggers/When_a_HTTP_request_is_received/invoke?api-version=2022-05-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig={{sig}}
 
-POST {{protocol}}://{{host}}/api/{{checkInAPI}} HTTP/1.1
+
+POST {{protocol}}://{{host}}/api/{{paymentAPI}} HTTP/1.1
 Content-Type: {{content-type}}
 
 {
