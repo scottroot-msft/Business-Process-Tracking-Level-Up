@@ -1,59 +1,84 @@
 {
-  "definition": {
-      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-      "actions": {
-          "Delay": {
-              "inputs": {
-                  "interval": {
-                      "count": 5,
-                      "unit": "Second"
-                  }
-              },
-              "runAfter": {},
-              "type": "Wait"
-          },
-          "Send_message": {
-              "inputs": {
-                  "parameters": {
-                      "entityName": "insurance-adjusted-queue",
-                      "message": {
-                          "contentData": "@triggerBody()?['contentData']",
-                          "contentType": "application/json"
-                      }
-                  },
-                  "serviceProviderConfiguration": {
-                      "connectionName": "serviceBus",
-                      "operationId": "sendMessage",
-                      "serviceProviderId": "/serviceProviders/serviceBus"
-                  }
-              },
-              "runAfter": {
-                  "Delay": [
-                      "SUCCEEDED"
-                  ]
-              },
-              "type": "ServiceProvider"
-          }
-      },
-      "contentVersion": "1.0.0.0",
-      "outputs": {},
-      "triggers": {
-          "When_messages_are_available_in_a_queue": {
-              "inputs": {
-                  "parameters": {
-                      "isSessionsEnabled": false,
-                      "queueName": "checked-out-queue"
-                  },
-                  "serviceProviderConfiguration": {
-                      "connectionName": "serviceBus",
-                      "operationId": "receiveQueueMessages",
-                      "serviceProviderId": "/serviceProviders/serviceBus"
-                  }
-              },
-              "splitOn": "@triggerOutputs()?['body']",
-              "type": "ServiceProvider"
-          }
-      }
-  },
-  "kind": "Stateful"
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Delay": {
+                "inputs": {
+                    "interval": {
+                        "count": 5,
+                        "unit": "Second"
+                    }
+                },
+                "runAfter": {
+                    "Parse_JSON": [
+                        "SUCCEEDED"
+                    ]
+                },
+                "type": "Wait"
+            },
+            "Parse_JSON": {
+                "inputs": {
+                    "content": "@triggerBody()?['contentData']",
+                    "schema": {
+                        "properties": {
+                            "appointment_id": {
+                                "type": "string"
+                            },
+                            "patient_name": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "runAfter": {},
+                "type": "ParseJson"
+            },
+            "Send_message": {
+                "inputs": {
+                    "parameters": {
+                        "entityName": "insurance-adjusted-queue",
+                        "message": {
+                            "contentData": {
+                                "appointment_id": "@{body('Parse_JSON')?['appointment_id']}",
+                                "patient_name": "@{body('Parse_JSON')?['patient_name']}"
+                            },
+                            "contentType": "application/json"
+                        }
+                    },
+                    "serviceProviderConfiguration": {
+                        "connectionName": "serviceBus",
+                        "operationId": "sendMessage",
+                        "serviceProviderId": "/serviceProviders/serviceBus"
+                    }
+                },
+                "runAfter": {
+                    "Delay": [
+                        "SUCCEEDED"
+                    ]
+                },
+                "type": "ServiceProvider"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "triggers": {
+            "When_messages_are_available_in_a_queue": {
+                "inputs": {
+                    "parameters": {
+                        "isSessionsEnabled": false,
+                        "queueName": "checked-out-queue"
+                    },
+                    "serviceProviderConfiguration": {
+                        "connectionName": "serviceBus",
+                        "operationId": "receiveQueueMessages",
+                        "serviceProviderId": "/serviceProviders/serviceBus"
+                    }
+                },
+                "splitOn": "@triggerOutputs()?['body']",
+                "type": "ServiceProvider"
+            }
+        }
+    },
+    "kind": "Stateful"
 }

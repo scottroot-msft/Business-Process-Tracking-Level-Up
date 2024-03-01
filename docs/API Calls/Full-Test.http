@@ -1,0 +1,26 @@
+@CheckInURL = [your check-in URL here]
+@ContentType = application/json
+
+@appointmentId = {{$guid}}
+
+# @name checkIn
+POST {{CheckInURL}} HTTP/1.1
+Content-Type: {{ContentType}}
+
+{
+    "appointment_id": "{{appointmentId}}",
+    "patient_name": "Scottizzle"
+}
+
+###
+
+@app_id = {{checkIn.response.body.appointment_id}}
+@PaymentURL = [your payment URL here]
+
+POST {{PaymentURL}} HTTP/1.1
+Content-Type: {{ContentType}}
+
+{
+    "appointment_id": "{{app_id}}",
+    "patient_name": "Scottizzle"
+}

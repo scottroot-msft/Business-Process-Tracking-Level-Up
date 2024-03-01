@@ -2,28 +2,9 @@
     "definition": {
         "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
         "actions": {
-            "Response": {
-                "type": "Response",
-                "kind": "Http",
+            "Parse_JSON": {
                 "inputs": {
-                    "statusCode": 201,
-                    "headers": {
-                        "content-type": "application/json"
-                    },
-                    "body": {
-                        "Status": "Payment Processed Succesfully"
-                    }
-                },
-                "runAfter": {}
-            }
-        },
-        "contentVersion": "1.0.0.0",
-        "outputs": {},
-        "triggers": {
-            "When_a_HTTP_request_is_received": {
-                "type": "Request",
-                "kind": "Http",
-                "inputs": {
+                    "content": "@triggerBody()",
                     "schema": {
                         "properties": {
                             "appointment_id": {
@@ -34,9 +15,52 @@
                             }
                         },
                         "type": "object"
+                    }
+                },
+                "runAfter": {},
+                "type": "ParseJson"
+            },
+            "Response": {
+                "inputs": {
+                    "body": {
+                        "Status": "Payment Processed Succesfully",
+                        "appointment_id": "@{body('Parse_JSON')?['appointment_id']}",
+                        "patient_name": "@{body('Parse_JSON')?['patient_name']}"
                     },
-                    "method": "POST"
-                }
+                    "headers": {
+                        "content-type": "application/json"
+                    },
+                    "statusCode": 201
+                },
+                "kind": "Http",
+                "runAfter": {
+                    "Parse_JSON": [
+                        "SUCCEEDED"
+                    ]
+                },
+                "type": "Response"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "triggers": {
+            "When_a_HTTP_request_is_received": {
+                "inputs": {
+                    "method": "POST",
+                    "schema": {
+                        "properties": {
+                            "appointment_id": {
+                                "type": "string"
+                            },
+                            "patient_name": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "kind": "Http",
+                "type": "Request"
             }
         }
     },
