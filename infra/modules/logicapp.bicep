@@ -68,7 +68,7 @@ resource logicApp 'Microsoft.Web/sites@2021-02-01' = {
     storageAccountConnectionStringSecret
   ]
   identity: {
-    type: 'UserAssigned'
+    type: 'SystemAssigned, UserAssigned'
     userAssignedIdentities: {
       '${managedIdentity.id}': {}
     }
@@ -128,3 +128,4 @@ resource diagnosticSettings 'Microsoft.Insights/diagnosticsettings@2017-05-01-pr
 
 output appServicePlanName string = appServicePlan.name
 output logicAppName string = logicApp.name
+output logicAppIdentityPrincipalId string = logicApp.identity.principalId

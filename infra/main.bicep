@@ -97,18 +97,19 @@ module logicAppDeployment 'modules/logicapp.bicep' = {
   }
 }
 
-// module azureDataExplorerDB 'modules/azdataexplorer.bicep' = {
-//   scope: rg
-//   name: '${abbrs.kustoClusters}${resourceToken}'
-//   params: {
-//     location: location
-//     managedIdentityName: managedIdentityDeployment.outputs.managedIdentityName
-//     databaseName: '${abbrs.kustoClustersDatabases}-${resourceToken}'
-//     clusterName: '${abbrs.kustoClusters}-${resourceToken}'
-//     skuName: 'Dev(No SLA)_Standard_E2a_v4'
-//     skuCapacity: 1
-//   }
-// }
+module azureDataExplorerDB 'modules/azdataexplorer.bicep' = {
+  scope: rg
+  name: '${abbrs.kustoClusters}${resourceToken}'
+  params: {
+    location: location
+    managedIdentityName: managedIdentityDeployment.outputs.managedIdentityName
+    databaseName: '${abbrs.kustoClustersDatabases}-${resourceToken}'
+    clusterName: '${abbrs.kustoClusters}-${resourceToken}'
+    skuName: 'Dev(No SLA)_Standard_E2a_v4'
+    skuCapacity: 1
+    logicAppIdentityPrincipalId: logicAppDeployment.outputs.logicAppIdentityPrincipalId
+  }
+}
 
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
