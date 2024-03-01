@@ -3,44 +3,45 @@
         "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
         "actions": {
             "Condition": {
+                "type": "If",
+                "expression": {
+                    "and": [
+                        {
+                            "greaterOrEquals": [
+                                "@variables('needs_labs')",
+                                1
+                            ]
+                        }
+                    ]
+                },
                 "actions": {
                     "Set_Queue_to_needs_labs": {
+                        "type": "SetVariable",
                         "inputs": {
                             "name": "next_queue_name",
                             "value": "examined-needs-labs-queue"
-                        },
-                        "type": "SetVariable"
+                        }
                     }
                 },
                 "else": {
                     "actions": {
                         "Set_Queue_to_examined": {
+                            "type": "SetVariable",
                             "inputs": {
                                 "name": "next_queue_name",
                                 "value": "examined-queue"
-                            },
-                            "type": "SetVariable"
+                            }
                         }
                     }
-                },
-                "expression": {
-                    "and": [
-                        {
-                            "less": [
-                                "@variables('needs_labs')",
-                                0
-                            ]
-                        }
-                    ]
                 },
                 "runAfter": {
                     "Needs_Labs_Randomizer": [
                         "SUCCEEDED"
                     ]
-                },
-                "type": "If"
+                }
             },
             "Delay": {
+                "type": "Wait",
                 "inputs": {
                     "interval": {
                         "count": "@rand(5,10)",
@@ -51,10 +52,10 @@
                     "Parse_JSON": [
                         "SUCCEEDED"
                     ]
-                },
-                "type": "Wait"
+                }
             },
             "Initialize_variable": {
+                "type": "InitializeVariable",
                 "inputs": {
                     "variables": [
                         {
@@ -67,10 +68,10 @@
                     "Delay": [
                         "SUCCEEDED"
                     ]
-                },
-                "type": "InitializeVariable"
+                }
             },
             "Needs_Labs_Randomizer": {
+                "type": "InitializeVariable",
                 "inputs": {
                     "variables": [
                         {
@@ -84,10 +85,10 @@
                     "Set_variable": [
                         "SUCCEEDED"
                     ]
-                },
-                "type": "InitializeVariable"
+                }
             },
             "Parse_JSON": {
+                "type": "ParseJson",
                 "inputs": {
                     "content": "@triggerBody()?['contentData']",
                     "schema": {
@@ -102,10 +103,10 @@
                         "type": "object"
                     }
                 },
-                "runAfter": {},
-                "type": "ParseJson"
+                "runAfter": {}
             },
             "Send_message": {
+                "type": "ServiceProvider",
                 "inputs": {
                     "parameters": {
                         "entityName": "@variables('next_queue_name')",
@@ -127,10 +128,10 @@
                     "Condition": [
                         "SUCCEEDED"
                     ]
-                },
-                "type": "ServiceProvider"
+                }
             },
             "Set_variable": {
+                "type": "SetVariable",
                 "inputs": {
                     "name": "next_queue_name",
                     "value": "needs-labs-queue"
@@ -139,18 +140,18 @@
                     "Initialize_variable": [
                         "SUCCEEDED"
                     ]
-                },
-                "type": "SetVariable"
+                }
             }
         },
         "contentVersion": "1.0.0.0",
         "outputs": {},
         "triggers": {
             "When_messages_are_available_in_a_queue": {
+                "type": "ServiceProvider",
                 "inputs": {
                     "parameters": {
-                        "isSessionsEnabled": false,
-                        "queueName": "taken-vitals-queue"
+                        "queueName": "taken-vitals-queue",
+                        "isSessionsEnabled": false
                     },
                     "serviceProviderConfiguration": {
                         "connectionName": "serviceBus",
@@ -158,8 +159,7 @@
                         "serviceProviderId": "/serviceProviders/serviceBus"
                     }
                 },
-                "splitOn": "@triggerOutputs()?['body']",
-                "type": "ServiceProvider"
+                "splitOn": "@triggerOutputs()?['body']"
             }
         }
     },
