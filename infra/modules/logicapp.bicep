@@ -7,7 +7,8 @@ param appInsightsName string
 param keyVaultName string
 param logicAppStorageAccountName string
 param logicAppStorageAccountConnectionStringSecretName string
-param serviceBusSasEndpoint string
+//param serviceBusSasEndpoint string
+param serviceBusConnectionStringSecretName string 
 
 resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2021-09-30-preview' existing = {
   name: managedIdentityName

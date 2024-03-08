@@ -91,7 +91,8 @@ module logicAppDeployment 'modules/logicapp.bicep' = {
     location: rg.location
     logAnalyticsWorkspaceName: loggingDeployment.outputs.logAnalyticsWorkspaceName
     managedIdentityName: managedIdentityDeployment.outputs.managedIdentityName
-    serviceBusSasEndpoint: serviceBusDeployment.outputs.serviceBusSASConnectionString
+    //serviceBusSasEndpoint: serviceBusDeployment.outputs.serviceBusSASConnectionString
+    serviceBusConnectionStringSecretName : serviceBusDeployment.outputs.serviceBusConnectionStringSecretName 
     logicAppStorageAccountConnectionStringSecretName: 'logic-app-storage-account-connection-string'
     logicAppStorageAccountName: '${abbrs.storageStorageAccounts}${resourceToken}'
   }
