@@ -95,8 +95,8 @@ resource logicAppAppConfigSettings 'Microsoft.Web/sites/config@2022-03-01' = {
     APPINSIGHTS_INSTRUMENTATIONKEY: appInsights.properties.InstrumentationKey
     APPLICATIONINSIGHTS_CONNECTION_STRING: appInsights.properties.ConnectionString
     ApplicationInsightsAgent_EXTENSION_VERSION: '~3'
-    //'ServiceBus-ConnectionString': '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=${serviceBusConnectionStringSecretName})'
-    'ServiceBus-ConnectionString': serviceBusSasEndpoint
+    'ServiceBus-ConnectionString': '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=${serviceBusConnectionStringSecretName})'
+    //'ServiceBus-ConnectionString': serviceBusSasEndpoint
     XDT_MicrosoftApplicationInsights_Mode: 'Recommended'
     FUNCTIONS_EXTENSION_VERSION: '~4'
     AzureWebJobsStorage: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=${logicAppStorageAccountConnectionStringSecretName})'
