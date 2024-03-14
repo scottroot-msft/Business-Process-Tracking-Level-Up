@@ -5,7 +5,7 @@ Business Process Tracking using Azure Integration Environments
 Hospital visit and patient management system.  Integraton events are used to manage patient visits and patient information.
 
 ### Business Process Architecture
-[link to business process architecture]
+![Hospital Tracking Business Process Architecture](docs/labs/images/patient-tracking-bus-process.png)
 
 ## Architecture
 The architecture is based on a microservices architecture.  The following services are used:
