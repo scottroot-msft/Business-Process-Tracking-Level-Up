@@ -1,12 +1,6 @@
 # Environment Setup
 
 ## Local Environment Setup
-
-To develop logic apps locally you need to install the following tools:
-# Environment Setup
-
-## Local Environment Setup
-
 To develop logic apps locally, you need to install the following tools:
 
 - [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
@@ -19,7 +13,6 @@ To develop logic apps locally, you need to install the following tools:
 - [Azurite](https://marketplace.visualstudio.com/items?itemName=Azurite.azurite)
 - [Azure CLI Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azurecli)
 - [Azure Account](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-account)
-- [MS Dotnet Tools CSharp](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 - [Azure Developer CLI](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.azure-dev)
 - [Azure Functions](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
 - [Azure Logic Apps Standard Designer](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurelogicapps)
