@@ -152,9 +152,13 @@ Recall that our business process runs primarily off of Azure Service Bus Queue t
     - Observe the business process tracking application in the Azure Portal to see the process move through the stages as you trigger the workflows.
     - Note: there is a random chance for the logic app flow to head down the labs path, so you may want to run multiple processes to see the different paths.
 
+        ![alt text](../images/demo/ie-bp-test-in-prog.png)
+
+    - Complete the payment process by calling the payment endpoint in the testing script.
+    ![alt text](../images/demo/ie-bp-test-done.png)
 
 
-
+### Note
 This was done intentionally to illustrate a manual step in the process in where the patient would pay for their services after evertyhing else has been completed. 
 
 **Note: this illustrates that there are NO resources 'waiting' for the patient to pay.  The process just hasn't gotten to that step yet.  There is no long running process that is waiting for days/weeks, just rather a guid in in ADE that doesn't have the last step...until it does.
