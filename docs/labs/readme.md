@@ -5,9 +5,7 @@
 - [Instructions](#instructions)
    - [Povision and Deploy the Contoso Hospital Workload](#povision-and-deploy-the-contoso-hospital-workload)
    - [Deploying again](#deploying-again)
-- [Create the Azure Integration Environment Resource](#create-the-azure-integration-environment-resource)
-- [Create Application](#create-application)
-- [Create Business Processes](#create-business-processes)
+   - [The Lab Instructions](#the-lab-instructions)
 - [Conclusion](#conclusion)
 - [Additional Resources](#additional-resources)
 
@@ -46,21 +44,22 @@ There a a few prerequisites for this lab. Please ensure you have completed the f
 
 ### Deploying again
 
-If you've only changed the logic app code in the `src` folder, then you don't need to re-provision the Azure resources. You can just run:
+If you've only changed the logic app code in the `src` folder, then you don't need to re-provision the Azure resources. 
 
+- You can just run:
 ```azd deploy```
 
-If you've changed the infrastructure files (`infra` folder or `azure.yaml`), then you'll need to re-provision the Azure resources. You can do that by running:
+If you've changed the infrastructure files (`infra` folder or `azure.yaml`), then you'll need to re-provision the Azure resources.
 
+- You can do that by running:
 ```azd up```
 
     
-4. Create the Azure Integration Environment Resource
-   - [Link to Create Integration Environment Instructions](https://learn.microsoft.com/en-us/azure/integration-environments/create-integration-environment)
-5. Create Application
-   - Create new Azure Data Explorer Storage
-      - Steps for that
-6. Create Business Processes
+## The Lab Instructions
+Once you have your environment provisioned, you then need to go over and follow the instructions to create the bulk of the rest of this lab exercise.
+
+The lab instructions are found here: 
+   - [Business Process Tracking Lab Instructions](instructions/README.md)
 
 ## Conclusion
 
@@ -68,5 +67,6 @@ Your infrastructure
 
 ## Additional Resources
 
-Provide any additional resources or references for further learning.
-
+- [Azure Integration Environments](https://docs.microsoft.com/en-us/azure/logic-apps/create-integration-environment)
+- [Azure Logic Apps](https://docs.microsoft.com/en-us/azure/logic-apps/)
+- [Azure Service Bus](https://docs.microsoft.com/en-us/azure/service-bus-messaging/)
