@@ -39,6 +39,7 @@ In this step we will provision the Azure Integration Environment.  This is the e
     - Region: Match the region of your resource group if possible
 
     It should look similar to this:
+    
     ![alt text](../images/demo/ie-create.png)
     
 5. Wait for the deployment to complete.  This can take a few minutes.
