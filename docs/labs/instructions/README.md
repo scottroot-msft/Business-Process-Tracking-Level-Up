@@ -6,8 +6,7 @@ Follow along below for step-by-step instructions on how to complete the Business
 - [Step 1: Provision the Azure Integration Environment](#step-1-provision-the-azure-integration-environment)
 - [Step 2: Create an Application and Link Resources](#step-2-create-an-application-and-link-resources)
 - [Step 3: Create Business Processes](#step-3-create-business-processes)
-- [Step 4: Link it all together](#step-4-link-it-all-together)
-- [Step 5: Testing](#step-5-testing)
+- [Step 4: Testing](#step-5-testing)
 - [IaC Note](#iac-note)
 
 
@@ -120,7 +119,7 @@ Your business process should now look similar to this:
 - Once you are done setting up the stages to monitor our business process, click the deploy button.  This will push everything into our ADE database and start tracking the process as they happen.
 
 
-## Step 5: Testing
+## Step 4: Testing
 There is a test script that you can leverage in the API Calls folder of this repository.  It does require the use of the REST Client extension in Visual Studio Code.  You can use the script to simulate the patient workflow and see the business process tracking in action.
 
 - Before you test, make sure that your Azure Data Explorer Cluser is running. Policy may shut it down after inactivity if you have created the resource in the past.  
