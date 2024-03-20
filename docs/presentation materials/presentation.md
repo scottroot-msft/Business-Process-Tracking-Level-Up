@@ -1,45 +1,33 @@
-# Business Process Management via Azure Integration Environments
+# Presentation Script
 
-## Introduction
+The goal of this script is to help anyone who wants to facilitate this as a presentation or workshop. It's designed to be a guide to help you understand the key points and steps to follow. It's not meant to be read verbatim, but rather to be used as a guide to help you understand the key points.
 
-- Briefly introduce the repository and its purpose.
-- Explain the importance of the integration environment.
+## Steps to follow / show
 
-## Integration Environment Overview
+Follow along below as a facilitator.  The goal is to show the audience how to get started with the solution and how to build and deploy it.  The demo/lab itself *should* be self-explanitory.
 
-- Describe the integration environment setup.
-- https://learn.microsoft.com/en-us/azure/integration-environments/overview
-- Highlight the key components and technologies used.
 
-## Features and Functionality
+### Laying the foundation
 
-- Discuss the main features and functionality of the integration environment.
-- Provide examples of how it can be used to streamline development and testing processes.
+- Show how to get to this repository and fork / clone
+- Show how to run the prerequisites scripts
+- Show VS Code and what the folder structure looks like
+- Demo a few of the key extensions / features
+    - Logic Apps Designer
+    - Bicep (show infrastructure as code pieces)
+    - AZD (Azure Developer CLI)
+        - Discuss the value of AZD
+        - Mention how environment setup is done and then used for the rest of the lab
+    - Mention github actions 
 
-## Benefits
+### Building the solution
 
-- Explain the benefits of using the integration environment.
-- Discuss how it improves collaboration and reduces integration issues.
+- Show the solution in the `src` folder
+- Walk through the `azd` commands and deploy
+    - Create a new environment, login, etc.
+    - Do the `azd up` command but don't wait for deployment to end it takes a long time
+        - Show a previous deployment in the portal
+- Continue on with the lab by creating each of the steps of the project via the IE stages and linking of important attributes.
 
-## Demo
-
-- Show a live demo of the integration environment in action.
-- Highlight its capabilities and showcase its ease of use.
-
-### Use Cases
-- Purchase Orders (invoicing, shipping, etc.) [find an image]
-- Inventory Management (stock levels, reordering, etc.) [find an image]
-- Customer Relationship Management (sales, marketing, etc.) [find an image]
-- Human Resources (payroll, benefits, etc.) [find an image]
-- Customer Transactions (payments, refunds, etc.) [find an image]
-- Supply Chain Management (sourcing, procurement, etc.) [find an image]
-
-## Conclusion
-
-- Summarize the key points discussed.
-
-- Encourage further exploration of the repository and its resources.
-
----
-
-Thank you for your attention!
+The final result should look like this:
+![alt text](../labs/images/demo/ie-bp-test-done.png)

@@ -1,5 +1,11 @@
 # Contoso Hospital Lab Setup
 
+This lab demonstrates how to use the Contoso Hospital Patient-Tracking Application to manage patient workflow. The lab will cover the following topics:
+
+- Business Process Tracking
+- Azure Integration Environments
+
+
 ## Table of Contents
 - [Prerequisites - START HERE](#prerequisites---start-here)
 - [Instructions](#instructions)
@@ -9,10 +15,6 @@
 - [Conclusion](#conclusion)
 - [Additional Resources](#additional-resources)
 
-This lab demonstrates how to use the Contoso Hospital Patient-Tracking Application to manage patient workflow. The lab will cover the following topics:
-
-- Business Process Tracking
-- Azure Integration Environments
 
 ## Prerequisites - START HERE
 
@@ -25,22 +27,23 @@ There a a few prerequisites for this lab. Please ensure you have completed the f
 1. Clone this repository to your local machine.
 2. Open the **INTEGRATION-ENVIRONMENT-DEMO** folder in Visual Studio Code.
 3. Povision and Deploy the Contoso Hospital Workload
-    - From the root directory of the project open, follow these steps to provision Azure resources and deploy the application code:
-         - Login to your Azure account:
-               ```shell
-               azd auth login
-               ```
-         - Create a new azd environment:
-               ```shell
-               azd env new
-               ```
+   - Open a terminal or use VS Code's terminal window
+   - From the root directory of the project open, follow these steps to provision Azure resources and deploy the application code:
+      - Login to your Azure account:
+            ```
+            azd auth login
+            ```
+      - Create a new azd environment:
+            ```
+            azd env new
+            ```
 
-          Enter a name that will be used for the resource group.
-          This will create a new folder in the `.azure` folder, and set it as the active environment for any calls to `azd` going forward.
+   Enter a name that will be used for the resource group.
+   This will create a new folder in the `.azure` folder, and set it as the active environment for any calls to `azd` going forward.
 4. Select any required/prompted options to complete the deployment.  
-         - You will be asked to select a subscription and resource group.  
-         - If you do not have a resource group, you can create one at this time. 
-         - Also specify the location for the deployment.
+      - You will be asked to select a subscription and resource group.  
+      - If you do not have a resource group, you can create one at this time. 
+      - Also specify the location for the deployment.
 
 ### Deploying again
 
@@ -63,7 +66,7 @@ The lab instructions are found here:
 
 ## Conclusion
 
-Your infrastructure
+Your infrastructure should now be deployed and you should be ready to start the lab.  If you have any questions, please reach out to the lab facilitator.
 
 ## Additional Resources
 

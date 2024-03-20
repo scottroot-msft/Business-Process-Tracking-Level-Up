@@ -1,4 +1,5 @@
 # Environment Setup
+This page includes information about setting up the environment for the integration environment lab.
 
 ## Local Environment Setup
 To develop logic apps locally, you need to install the following tools:
