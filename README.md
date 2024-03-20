@@ -2,6 +2,12 @@
 
 This repository serves as a Level Up reference and lab for learning how to monitor business processes using [Azure Integration Environments (Preview)](https://learn.microsoft.com/en-us/azure/integration-environments/overview).
 
+## Table of Contents
+- [Business Scenario](#business-scenario)
+- [Azure Services Leveraged](#azure-services-leveraged)
+- [Repo structure](#repo-structure)
+- [Getting Started](#getting-started)
+
 ## Business Scenario
 This is the Contoso American hospital visit and patient management system. In the USA, patients often will have their services billed to insurance to have their liability adjusted, and then the remainder of what insurance does NOT cover will be the responsibility of the patient to cover.
 
@@ -26,4 +32,4 @@ The repository has the following folder structure:
 - `scripts`: Contains scripts to help you check requirements and for AZD to leverage
 
 ## Getting Started
-Lab instructions are provided in the [docs](./docs/labs/readme.md) folder.
+Lab instructions are provided in the [docs/labs](./docs/labs/readme.md) folder.
