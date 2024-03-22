@@ -5,23 +5,24 @@ This lab demonstrates how to use the Contoso Hospital Patient-Tracking Applicati
 - Business Process Tracking
 - Azure Integration Environments
 
-
 ## Table of Contents
+
 - [Prerequisites - START HERE](#prerequisites---start-here)
-- [Instructions](#instructions)
-   - [Povision and Deploy the Contoso Hospital Workload](#povision-and-deploy-the-contoso-hospital-workload)
-   - [Deploying again](#deploying-again)
-   - [The Lab Instructions](#the-lab-instructions)
+- Instructions
+  - [Deploy Infrastructure](#deploy-infrastructure)
+  - [Deploying Appication Updates](#deploying-application-updates)
+  - [The Lab Instructions](#the-lab-instructions)
 - [Conclusion](#conclusion)
 - [Additional Resources](#additional-resources)
 
-
 ## Prerequisites - START HERE
 
-There a a few prerequisites for this lab. Please ensure you have completed the following instructions before starting this lab:
-- [START HERE - Environment Setup](environment-setup.md) 
+There are a few prerequisites for this lab. Please ensure you have completed the following instructions before starting this lab:
+
+- [START HERE - Environment Setup](environment-setup.md)
 
 ## Deploy Infrastructure
+
 *Note that this process can take upwards of 20-30 minutes to complete.
 
 1. Clone this repository to your local machine.
@@ -41,13 +42,13 @@ There a a few prerequisites for this lab. Please ensure you have completed the f
    Enter a name that will be used for the resource group.
    This will create a new folder in the `.azure` folder, and set it as the active environment for any calls to `azd` going forward.
 4. Select any required/prompted options to complete the deployment.  
-      - You will be asked to select a subscription and resource group.  
-      - If you do not have a resource group, you can create one at this time. 
-      - Also specify the location for the deployment.
+      - You will be asked to select a Subscription and Resource Group.  
+      - If you do not have a Resource Group, you can create one at this time.
+      - Also specify the Location for the deployment.
 
-### Deploying again
+### Deploying Application Updates
 
-If you've only changed the logic app code in the `src` folder, then you don't need to re-provision the Azure resources. 
+If you've only changed the logic app code in the `src` folder, then you don't need to re-provision the Azure resources.
 
 - You can just run:
 ```azd deploy```
@@ -57,16 +58,17 @@ If you've changed the infrastructure files (`infra` folder or `azure.yaml`), the
 - You can do that by running:
 ```azd up```
 
-    
 ## The Lab Instructions
+
 Once you have your environment provisioned, you then need to go over and follow the instructions to create the bulk of the rest of this lab exercise.
 
-The lab instructions are found here: 
-   - [Business Process Tracking Lab Instructions](instructions/README.md)
+The lab instructions are found here:
+
+- [Business Process Tracking Lab Instructions](instructions/README.md)
 
 ## Conclusion
 
-Your infrastructure should now be deployed and you should be ready to start the lab.  If you have any questions, please reach out to the lab facilitator.
+Your infrastructure should now be deployed and you should be ready to start the lab. If you have any questions, please reach out to the lab facilitator.
 
 ## Additional Resources
 
