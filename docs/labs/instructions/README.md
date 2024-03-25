@@ -117,7 +117,7 @@ Your business process should now look similar to this:
 
 ## Step 4: Testing
 
-There is a test script that you can leverage in the [API Calls](../../API%20Calls/) folder of this repository. It does require the use of the REST Client extension in Visual Studio Code. You can use the script to simulate the patient workflow and see the business process tracking in action.
+There is a test script that you can leverage in the [API Calls](../../API%20Calls/) folder of this repository. It does require the use of the [REST Client extension](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) in Visual Studio Code. You can use the script to simulate the patient workflow and see the business process tracking in action.
 
 - Before you test, make sure that your Azure Data Explorer Cluser is running. Policy may shut it down after inactivity if you have created the resource in the past.  
 
