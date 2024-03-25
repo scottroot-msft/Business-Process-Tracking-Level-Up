@@ -15,5 +15,5 @@ Content-Type: {{content-type}}
 
 {
     "appointment_id": "123",
-    "patient_name": "Scottizzle"
+    "patient_name": "John Smith"
 }
