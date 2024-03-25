@@ -9,7 +9,7 @@ Content-Type: {{ContentType}}
 
 {
     "appointment_id": "{{appointmentId}}",
-    "patient_name": "Scottizzle"
+    "patient_name": "John Smith"
 }
 
 ###
@@ -22,5 +22,5 @@ Content-Type: {{ContentType}}
 
 {
     "appointment_id": "{{app_id}}",
-    "patient_name": "Scottizzle"
+    "patient_name": "John Smith"
 }
