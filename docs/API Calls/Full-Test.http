@@ -2,6 +2,7 @@
 @ContentType = application/json
 
 @appointmentId = {{$guid}}
+@patientName = Cortana Contoso
 
 # @name checkIn
 POST {{CheckInURL}} HTTP/1.1
@@ -9,7 +10,7 @@ Content-Type: {{ContentType}}
 
 {
     "appointment_id": "{{appointmentId}}",
-    "patient_name": "John Smith"
+    "patient_name": "{{patientName}}"
 }
 
 ###
@@ -22,5 +23,5 @@ Content-Type: {{ContentType}}
 
 {
     "appointment_id": "{{app_id}}",
-    "patient_name": "John Smith"
+    "patient_name": "{{patientName}}"
 }
