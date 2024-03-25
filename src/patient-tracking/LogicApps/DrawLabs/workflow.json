@@ -67,7 +67,7 @@
               "inputs": {
                   "parameters": {
                       "isSessionsEnabled": false,
-                      "queueName": "examined-needs-labs-queue"
+                      "queueName": "needs-labs-queue"
                   },
                   "serviceProviderConfiguration": {
                       "connectionName": "serviceBus",

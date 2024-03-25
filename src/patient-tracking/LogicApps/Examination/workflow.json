@@ -19,7 +19,7 @@
                         "type": "SetVariable",
                         "inputs": {
                             "name": "next_queue_name",
-                            "value": "examined-needs-labs-queue"
+                            "value": "needs-labs-queue"
                         }
                     }
                 },
