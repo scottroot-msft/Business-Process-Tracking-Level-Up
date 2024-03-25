@@ -95,12 +95,12 @@ The provisioning steps created an Azure Data Explorer cluster and a database tha
 
 ### Repeat the above steps to create the following stages
 
-Now complete the same steps to create the following stages clicking the ```save``` icon after each stage is created:
+Now complete the same steps to create the following stages clicking the ```save``` icon after each stage is created. You can create parellel branches by selecting to add another stage after Examination and select Add Parallel Stage.
 
 - ```Triage```
 - ```Take-Vitals```
 - ```Examination```
-- BRANCH for ```Check-Out``` and ```Draw-Labs```
+- Parallel BRANCH for ```Check-Out``` and ```Draw-Labs```
 - Underneath ```Check-Out``` create stages for
   - ```Insurance```
   - ```Billing```
@@ -113,7 +113,7 @@ Your business process should now look similar to this:
 
 ![alt text](../images/demo/ie-bp-stages-done.png)
 
-- Once you are done setting up the stages to monitor our business process, click the deploy button. This will push everything into our ADE database and start tracking the processes as they happen.
+- Once you are finished setting up the stages to monitor the business process, click the Deploy button. This will push everything into your ADE database and start tracking the processes as they happen.
 
 ## Step 4: Testing
 
@@ -127,7 +127,7 @@ There is a test script that you can leverage in the [API Calls](../../API%20Call
 
 Using this basic testing script, you will need to provide two URLs to your logic apps so that you may trigger them via HTTP.
 
-Recall that our business process runs primarily off of Azure Service Bus Queue triggers so the only entry points we have to manually interact with this process is to begin everything via ```Check-In``` and to execute the ```payment``` endpoint to close the process.  
+Recall that the business process runs primarily off of Azure Service Bus Queue triggers so the only entry points you have to manually interact with this process is to begin everything via ```Check-In``` and to execute the ```payment``` endpoint to close the process.  
 
 - Getting your logic app endpoints to use in the testing script:
   - Navigate to the logic app standard resource in the Azure Portal
@@ -153,9 +153,9 @@ Recall that our business process runs primarily off of Azure Service Bus Queue t
 
 ### Note
 
-This was done intentionally to illustrate a manual step in the process in where the patient would pay for their services after evertyhing else has been completed.
+This was done intentionally to illustrate a manual step in the process in where the patient would pay for their services after everything else has been completed.
 
-**Note: this illustrates that there are NO resources 'waiting' for the patient to pay. The process just hasn't gotten to that step yet. There is no long running process that is waiting for days/weeks, just rather a guid in in ADE that does NOT have the last step...until it does.
+**Note: this illustrates that there are NO resources 'waiting' for the patient to pay. The process just has not reached that step yet. There is no long running process that is waiting for days/weeks, just rather a guid in ADE that does NOT have the last step... until it does.
 
 ## IaC Note
 
