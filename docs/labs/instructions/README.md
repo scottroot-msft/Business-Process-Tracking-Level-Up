@@ -157,6 +157,16 @@ This was done intentionally to illustrate a manual step in the process in where 
 
 **Note: this illustrates that there are NO resources 'waiting' for the patient to pay. The process just has not reached that step yet. There is no long running process that is waiting for days/weeks, just rather a guid in ADE that does NOT have the last step... until it does.
 
+### Optional - Break Stuff!
+
+Head over to the logic app in the portal and disable one of the workflows.  For example, disable the `take-vitals` workflow.  Then run the test script again.  You will see that the business process tracking application will show that the process is stuck at the `Take-Vitals` stage.  This is a great way to see how the business process tracking application can help you identify where things are stuck in your process.
+
+#### Troubleshooting
+
+Look at the service bus namespace and inspect the queues to note that there is one message stuck in the `take-vitals` queue.  This is because the logic app is disabled and the message is not being processed. **You have discovered the problem**
+
+Enable the previously disabled workflow and watch the business process tracking application move the process along on its own since we are using Azure Service Bus triggers... **You have fixed the problem**
+
 ## IaC Note
 
 You may be asking yourself: "why we are creating all of this in the portal and not via IaC?". The answer is that the Azure Integration Environment is a new service and the IaC support is not yet available. We are working on it and will update this lab when it is available. There is also some value in visually seeing how things are linked together in the portal. This is especially true for the business process tracking application.
