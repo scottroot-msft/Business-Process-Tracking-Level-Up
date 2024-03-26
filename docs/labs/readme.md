@@ -38,7 +38,12 @@ There are a few prerequisites for this lab. Please ensure you have completed the
             ```
             azd env new
             ```
-
+    
+      - Provision infrastructure:
+            ```
+            azd provision
+            ```
+        
    Enter a name that will be used for the resource group.
    This will create a new folder in the `.azure` folder, and set it as the active environment for any calls to `azd` going forward.
 4. Select any required/prompted options to complete the deployment.  
